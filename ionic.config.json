@@ -1,6 +1,6 @@
 {
-  "name": "personal-starter-sidemenu",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+    "name": "personal-starter-sidemenu",
+    "app_id": "",
+    "type": "ionic-angular",
+    "integrations": {}
 }
