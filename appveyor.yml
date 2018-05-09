@@ -68,9 +68,11 @@ test: off
 #---------------------------------#
 
 notifications:
-  # Slack
+  # Slack:
+  # When you specify channel name make sure it starts with # sign if it’s public channel
+  # You also need to quote channel name to pass YAML validation
   - provider: Slack
     incoming_webhook:
       secure: v42ynvt9jDeqjrWYYdht6cGuwa/iSjI7G4SJZAfhEDX5LYuwjnKDmgzDKTi0LRyM3r+nrQNyTHkWGhmCXPs9+2XCVWg5YGv/nB9MRcB+oBQ=
-    # channel: development
-    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}>\n{{#passed}}Build passed{{/passed}}{{#failed}}Build failed{{/failed}}\nCommit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"
+      channel: '#ionic-starter-sm'
+    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}>\n{{#passed}}Build passed!{{/passed}}{{#failed}}Build failed{{/failed}}\nCommit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"
