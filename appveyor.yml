@@ -11,7 +11,7 @@
 #---------------------------------#
 
 # version format
-version: 1.0.{build}
+version: 1.0.0-build.{build}
 
 #---------------------------------#
 #    environment configuration    #
@@ -20,15 +20,13 @@ version: 1.0.{build}
 # Test against this version of Node.js
 environment:
   nodejs_version: "lts"
-  cordova_version: "8.0.0"
-  ionic_version: "3.20.0"
 
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
-  - npm install -g cordova@ $env:cordova_version ionic@ $env:ionic_version
+  - npm install -g cordova@8.0.0 ionic@3.20.0
   - npm install
 
 #---------------------------------#
