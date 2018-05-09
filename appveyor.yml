@@ -72,3 +72,5 @@ notifications:
   - provider: Slack
     incoming_webhook:
       secure: v42ynvt9jDeqjrWYYdht6cGuwa/iSjI7G4SJZAfhEDX5LYuwjnKDmgzDKTi0LRyM3r+nrQNyTHkWGhmCXPs9+2XCVWg5YGv/nB9MRcB+oBQ=
+    # channel: development
+    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}>\n{{#passed}}Build passed{{/passed}}{{#failed}}Build failed{{/failed}}\nCommit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}: _{{commitMessage}}_"
