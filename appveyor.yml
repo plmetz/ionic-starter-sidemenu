@@ -72,4 +72,5 @@ test: off
 notifications:
   # Slack
   - provider: Slack
-    incoming_webhook: $env:slack_incoming_hook
+    incoming_webhook:
+      secure: $env:slack_incoming_hook
