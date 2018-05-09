@@ -52,6 +52,8 @@ In order to use Code Climate in your own project you will need to connect it to 
 1) Create an account on [Code Climate](https://codeclimate.com/)
 2) Connect your account to your repository
 3) Get your own badge by going to your project on Code Climate then to `settings` then `badges`. Copy and paste into [README](../README.md)
+4) Connect to GitHub so that pushes will trigger a new code examination. In the project on Code Climate go to `settings` then `Git Repository`then `Install Webhook on GitHub`
+5) If desired setup notifications via Slack or other method by going to project then `settings` then `integrations`.
 
 **Remove:**
 

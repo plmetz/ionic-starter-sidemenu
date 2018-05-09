@@ -35,5 +35,5 @@
         "@ionic/app-scripts": "3.1.9",
         "typescript": "2.8.3"
     },
-    "description": "A personalized ionic starter using the sidemenu starter"
+    "description": "A personalized ionic starter using the side menu starter"
 }
