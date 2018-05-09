@@ -1,4 +1,7 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/7csk7ba1b8wmq2cx?svg=true)](https://ci.appveyor.com/project/plmetz/ionic-starter-sidemenu)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4c355cea0cbc857f8c2b/maintainability)](https://codeclimate.com/github/plmetz/ionic-starter-sidemenu/maintainability)
+[![Dependency Status](https://david-dm.org/plmetz/ionic-starter-sidemenu/status.svg)](https://david-dm.org/lathonez/clicker)
+[![devDependency Status](https://david-dm.org/plmetz/ionic-starter-sidemenu/dev-status.svg)](https://david-dm.org/lathonez/clicker#info=devDependencies)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 # Personalized Ionic Stater - Side Menu
