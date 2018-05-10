@@ -22,7 +22,18 @@
             false
         ]
     },
-    "jsRules": {},
+    "jsRules": {
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "no-consecutive-blank-lines": [
+            false
+        ],
+        "trailing-comma": [
+            false
+        ]
+    },
     "rulesDirectory": [
         "node_modules/tslint-eslint-rules/dist/rules"
     ]

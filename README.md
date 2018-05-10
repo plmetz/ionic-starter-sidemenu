@@ -1,4 +1,10 @@
-# Personalized Ionic Stater - Sidemenu
+[![Build status](https://ci.appveyor.com/api/projects/status/7csk7ba1b8wmq2cx?svg=true)](https://ci.appveyor.com/project/plmetz/ionic-starter-sidemenu)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4c355cea0cbc857f8c2b/maintainability)](https://codeclimate.com/github/plmetz/ionic-starter-sidemenu/maintainability)
+[![Dependency Status](https://david-dm.org/plmetz/ionic-starter-sidemenu/status.svg)](https://david-dm.org/plmetz/ionic-starter-sidemenu)
+[![devDependency Status](https://david-dm.org/plmetz/ionic-starter-sidemenu/dev-status.svg)](https://david-dm.org/plmetz/ionic-starter-sidemenu?type=dev)
+[![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
+# Personalized Ionic Stater - Side Menu
 
 This is an opinionated and personalized starter for [Ionic](https://ionicframework.com) based off the side menu starter.
 
@@ -12,7 +18,7 @@ I don't expect many other people to have the same coding preferences as me there
 
 ## Deviations Made From Ionic Starter
 
-### TSLint and Editor Config:
+#### TSLint and Editor Config:
 
 Changes to support my coding style and preferences in `tslint.json` and `.editorconfig` and then linted and updated rest of code base to comply with those changes.
 
@@ -24,7 +30,7 @@ Changes to support my coding style and preferences in `tslint.json` and `.editor
 * Clone this repository: `git clone https://github.com/plmetz/ionic-starter-sidemenu.git`.
 * Run `npm install` from the project root.
 * Run `ionic serve` in a terminal from the project root.
-* Enjoy
+* If you plan on using this as a starter for your own project see [customizing doc](docs/customizing_main.md) for more information.
 
 *For additional usage documentation and information check out the great [Ionic Docs](https://ionicframework.com/docs/).*
 
