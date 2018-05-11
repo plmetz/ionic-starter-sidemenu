@@ -43,6 +43,7 @@
         "@types/jasmine": "^2.8.7",
         "@types/node": "^10.0.8",
         "angular2-template-loader": "^0.6.2",
+        "codecov": "^3.0.2",
         "html-loader": "^0.5.5",
         "istanbul-instrumenter-loader": "^3.0.1",
         "jasmin": "0.0.2",
