@@ -117,6 +117,12 @@ export class NavMock {
 
 }
 
+export class NavParamsMock {
+    public get(key): any {
+        return undefined;
+    }
+}
+
 export class DeepLinkerMock {
 
 }
