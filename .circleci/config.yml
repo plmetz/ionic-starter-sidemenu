@@ -1,0 +1,79 @@
+#
+# CircleCI 2.0 configuration file
+#
+# Reference: https://circleci.com/docs/2.0/configuration-reference/
+#
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      # Checkout repoistory
+      - checkout
+
+      # Install global dependencies
+      - run:
+          name: Install Global Dependencies
+          command: |
+            sudo yarn global add ionic@latest cordova
+
+      # Restore cached node_modules folder if there is one
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      # Install from package.json using yarn
+      - run:
+          name: Install Packages
+          command: yarn install
+
+      # Save node_modules folder to cache
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # Print Ionic Debig Info
+      - run:
+          name: Ionic Info
+          command: ionic info
+
+      # Lint
+      - run:
+          name: Lint
+          command: yarn run lint
+
+      # Run Unit Tests
+      - run:
+          name: Run Unit Tests
+          environment:
+            JUNIT_REPORT_PATH: ./test-results/karma
+            JUNIT_REPORT_NAME: results.xml
+          command: yarn run test-ci
+
+      # Store Test Results For Build Unit Test Summary
+      - store_test_results:
+          path: ./test-results/
+
+      # Store Artifacts of Unit Test Results
+      - store_artifacts:
+          path: ./test-results/
+          destination: test-results
+
+      # Store Artifacts of Unit Test Coverage
+      - store_artifacts:
+          path: ./coverage/
+          destination: test-coverage
+
+      # Upload Coverage Information To Codecov
+      - run:
+          name: Upload Coverage To Codecov
+          environment:
+            CODECOV_TOKEN: 7bb5fc6f-e960-4a51-8069-6e4c07d4d847
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/codecov

@@ -46,7 +46,7 @@ module.exports = function (config) {
         },
 
         coverageIstanbulReporter: {
-            reports: ['html', 'lcovonly'],
+            reports: ['html', 'text-summary', 'text', 'lcov'],
             fixWebpackSourcePaths: true
         },
 
@@ -55,6 +55,7 @@ module.exports = function (config) {
         },
 
         reporters: config.coverage ? ['mocha', 'coverage-istanbul', 'junit'] : ['mocha'],
+
         junitReporter: {
             outputDir: process.env.JUNIT_REPORT_PATH ? process.env.JUNIT_REPORT_PATH : 'coverage',
             outputFile: process.env.JUNIT_REPORT_NAME ? process.env.JUNIT_REPORT_NAME : 'junit-test-results.xml',
