@@ -7,6 +7,23 @@ Each tool used in this project that needs to be customized is listed below along
 
 **Note:** Before customizing you should follow the directions in the [README](../README.md) to clone the repository and then you will need to push it up to your own git repository (github is used for these examples).
 
+## Codecov
+
+[Codecov](https://codecov.io) is a service that helps display and manage unit test code coverage. There are paid tiers but it is free for open source projects.
+
+**Customize:**
+
+In this project code coverage reports are uploaded from CircleCI after each run. If you choose to not use CircleCI look at documentation [here](https://www.npmjs.com/package/codecov) and [here](https://github.com/codecov/example-typescript) on how to integrate Codecov into your own workflow. If you are using CircleCI then follow these steps to integrate it with your project.
+
+1. Create and account at [Codecov](https://codecov.io)
+2. Connect account to your repository and get your `repository upload token`
+3. Replace `CODECOV_TOKEN` in the CircleCI [config.yml](../.circleci/config.yml) with your own token
+4. Replace the badge in [README](../README.md) with your own from Codecov project then `settings` then `badge`
+
+**Remove:**
+
+To remove Codecov support remove the `Upload Coverage Information To CodeCov` section of the CircleCI [config.yml](../.circleci/config.yml). Also remove the badge from [README](../README.md).
+
 ## AppVeyor
 
 [AppVeyor](https://appveyor.com/) is a continuous integration solution used to test the build status of the app. It works with GitHub, Bitbucket, GitLab, and VSTS. There are paid tiers but it is free for open source projects.
