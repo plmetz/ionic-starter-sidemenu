@@ -54,7 +54,12 @@ module.exports = function (config) {
             maxLogLines: 1
         },
 
-        reporters: config.coverage ? ['mocha', 'coverage-istanbul'] : ['mocha'],
+        reporters: config.coverage ? ['mocha', 'coverage-istanbul', 'junit'] : ['mocha'],
+        junitReporter: {
+            outputDir: process.env.JUNIT_REPORT_PATH ? process.env.JUNIT_REPORT_PATH : 'coverage',
+            outputFile: process.env.JUNIT_REPORT_NAME ? process.env.JUNIT_REPORT_NAME : 'junit-test-results.xml',
+            useBrowserName: false
+        },
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
