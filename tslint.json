@@ -2,6 +2,7 @@
     "extends": "tslint:latest",
     "rules": {
         "interface-name": false,
+        "max-line-length": false,
         "member-access": [
             false
         ],
@@ -30,6 +31,8 @@
         "no-consecutive-blank-lines": [
             false
         ],
+        "object-literal-sort-keys": false,
+        "space-before-function-paren": false,
         "trailing-comma": [
             false
         ]
