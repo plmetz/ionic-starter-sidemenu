@@ -21,10 +21,14 @@ exports.config = {
         defaultTimeoutInterval: 30000,
         print: function () { }
     },
-    onPrepare() {
+    beforeLaunch: function () {
         require('ts-node').register({
             project: 'e2e/tsconfig.e2e.json'
         });
+
+        require('connect')().use(require('serve-static')('www')).listen(4200);
+    },
+    onPrepare() {
         jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
     }
 };
