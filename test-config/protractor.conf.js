@@ -39,8 +39,8 @@ exports.config = {
             showStack: true
         }));
         jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-            savePath: process.env.JUNIT_REPORT_PATH,
-            outputFile: process.env.JUNIT_REPORT_NAME,
+            savePath: process.env.JUNIT_REPORT_PATH ? process.env.JUNIT_REPORT_PATH : 'coverage/e2e',
+            outputFile: process.env.JUNIT_REPORT_NAME ? process.env.JUNIT_REPORT_NAME : 'junit_e2e_results.xml',
             consolidateAll: true
         }));
     }

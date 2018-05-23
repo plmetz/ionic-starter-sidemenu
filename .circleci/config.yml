@@ -16,6 +16,8 @@ jobs:
       - checkout
 
       # Install global dependencies
+      # Ionic - needed for ionic CLI
+      # Cordova - for build
       - run:
           name: Install Global Dependencies
           command: |
@@ -53,20 +55,20 @@ jobs:
       - run:
           name: Run Unit Tests
           environment:
-            JUNIT_REPORT_PATH: ./test-results/karma
+            JUNIT_REPORT_PATH: ./test-results/karma-unit
             JUNIT_REPORT_NAME: results.xml
           command: yarn run test-ci
 
-      # Store Test Results For Build Unit Test Summary
+      # Store Test Results For Build Unit Test Summary On Testing Dashboard
       - store_test_results:
           path: ./test-results/
 
-      # Store Artifacts of Unit Test Results
+      # Store Artifacts of Unit Test Results in Test Artiface
       - store_artifacts:
           path: ./test-results/
           destination: test-results
 
-      # Store Artifacts of Unit Test Coverage
+      # Store Artifacts of Unit Test Coverage in Test Artifacts
       - store_artifacts:
           path: ./coverage/
           destination: test-coverage
@@ -77,3 +79,12 @@ jobs:
           environment:
             CODECOV_TOKEN: 7bb5fc6f-e960-4a51-8069-6e4c07d4d847
           command: cat ./coverage/lcov.info | ./node_modules/.bin/codecov
+
+      # Run e2e Tests
+      - run:
+          name: e2e Test
+          environment:
+            JUNIT_REPORT_PATH: ./test-results/protractor-e2e,
+            JUNIT_REPORT_NAME: junit_e2e_results.xml
+          command: yarn run e2e-ci
+
