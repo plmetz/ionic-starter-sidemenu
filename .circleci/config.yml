@@ -12,6 +12,11 @@ jobs:
     working_directory: ~/repo
 
     steps:
+
+      ###########
+      # PREPARE #
+      ###########
+
       # Checkout repoistory
       - checkout
 
@@ -46,6 +51,10 @@ jobs:
           name: Ionic Info
           command: ionic info
 
+      #################
+      # LINT AND TEST #
+      #################
+
       # Lint
       - run:
           name: Lint
@@ -59,20 +68,6 @@ jobs:
             JUNIT_REPORT_NAME: results.xml
           command: yarn run test-ci
 
-      # Store Test Results For Build Unit Test Summary On Testing Dashboard
-      - store_test_results:
-          path: ./test-results/
-
-      # Store Artifacts of Unit Test Results in Test Artiface
-      - store_artifacts:
-          path: ./test-results/
-          destination: test-results
-
-      # Store Artifacts of Unit Test Coverage in Test Artifacts
-      - store_artifacts:
-          path: ./coverage/
-          destination: test-coverage
-
       # Upload Coverage Information To Codecov
       - run:
           name: Upload Coverage To Codecov
@@ -82,9 +77,26 @@ jobs:
 
       # Run e2e Tests
       - run:
-          name: e2e Test
+          name: E2E Test
           environment:
             JUNIT_REPORT_PATH: ./test-results/protractor-e2e,
             JUNIT_REPORT_NAME: junit_e2e_results.xml
           command: yarn run e2e-ci
 
+      #################
+      # STORE RESULTS #
+      #################
+
+      # Store Test Results For Build Test Summary On Build Dashboard
+      - store_test_results:
+          path: ./test-results/
+
+      # Store Artifacts of Unit and E2E Test Results in Test Artiface
+      - store_artifacts:
+          path: ./test-results/
+          destination: test-results
+
+      # Store Artifacts of Unit Test Coverage in Test Artifacts
+      - store_artifacts:
+          path: ./coverage/
+          destination: test-coverage
