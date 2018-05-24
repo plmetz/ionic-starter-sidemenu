@@ -12,10 +12,17 @@ jobs:
     working_directory: ~/repo
 
     steps:
+
+      ###########
+      # PREPARE #
+      ###########
+
       # Checkout repoistory
       - checkout
 
       # Install global dependencies
+      # Ionic - needed for ionic CLI
+      # Cordova - for build
       - run:
           name: Install Global Dependencies
           command: |
@@ -44,6 +51,10 @@ jobs:
           name: Ionic Info
           command: ionic info
 
+      #################
+      # LINT AND TEST #
+      #################
+
       # Lint
       - run:
           name: Lint
@@ -53,23 +64,9 @@ jobs:
       - run:
           name: Run Unit Tests
           environment:
-            JUNIT_REPORT_PATH: ./test-results/karma
+            JUNIT_REPORT_PATH: ./test-results/karma-unit
             JUNIT_REPORT_NAME: results.xml
           command: yarn run test-ci
-
-      # Store Test Results For Build Unit Test Summary
-      - store_test_results:
-          path: ./test-results/
-
-      # Store Artifacts of Unit Test Results
-      - store_artifacts:
-          path: ./test-results/
-          destination: test-results
-
-      # Store Artifacts of Unit Test Coverage
-      - store_artifacts:
-          path: ./coverage/
-          destination: test-coverage
 
       # Upload Coverage Information To Codecov
       - run:
@@ -77,3 +74,30 @@ jobs:
           environment:
             CODECOV_TOKEN: 7bb5fc6f-e960-4a51-8069-6e4c07d4d847
           command: cat ./coverage/lcov.info | ./node_modules/.bin/codecov
+
+      # Run e2e Tests
+      - run:
+          name: E2E Test
+          environment:
+            JUNIT_REPORT_PATH: ./test-results/protractor-e2e,
+            JUNIT_REPORT_NAME: junit_e2e_results.xml
+          command: yarn run e2e-ci
+
+      #################
+      # STORE RESULTS #
+      #################
+
+      # Store Test Results For Build Test Summary On Build Dashboard
+      - store_test_results:
+          path: ./test-results/
+
+      # Store Artifacts of Unit and E2E Test Results in Test Artiface
+      - store_artifacts:
+          path: ./test-results/
+          destination: test-results
+
+      # Store Artifacts of Unit Test Coverage in Test Artifacts
+      - store_artifacts:
+          path: ./coverage/
+          destination: test-coverage
+          

@@ -3,28 +3,43 @@
 
 // tslint:disable:no-empty
 
-const { SpecReporter } = require('jasmine-spec-reporter');
-
 exports.config = {
     allScriptsTimeout: 11000,
     specs: [
         '../e2e/**/*.e2e-spec.ts'
     ],
     capabilities: {
-        'browserName': 'chrome'
+        'browserName': 'chrome',
+        chromeOptions: {
+            args: ['--no-sandbox']
+        }
     },
     directConnect: true,
-    baseUrl: 'http://localhost:8100/',
+    baseUrl: 'http://localhost:4200/',
     framework: 'jasmine',
     jasmineNodeOpts: {
         showColors: true,
         defaultTimeoutInterval: 30000,
         print: function () { }
     },
-    onPrepare() {
+    beforeLaunch: function () {
         require('ts-node').register({
             project: 'e2e/tsconfig.e2e.json'
         });
-        jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+
+        require('connect')().use(require('serve-static')('www')).listen(4200);
+    },
+    onPrepare() {
+        var jasmineReporters = require('jasmine-reporters');
+        jasmine.getEnv().addReporter(new jasmineReporters.TerminalReporter({
+            verbosity: 3,
+            color: true,
+            showStack: true
+        }));
+        jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+            savePath: process.env.JUNIT_REPORT_PATH ? process.env.JUNIT_REPORT_PATH : 'coverage/e2e',
+            outputFile: process.env.JUNIT_REPORT_NAME ? process.env.JUNIT_REPORT_NAME : 'junit_e2e_results.xml',
+            consolidateAll: true
+        }));
     }
 };
