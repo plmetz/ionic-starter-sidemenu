@@ -2,6 +2,7 @@
     "extends": "tslint:latest",
     "rules": {
         "interface-name": false,
+        "max-line-length": false,
         "member-access": [
             false
         ],
@@ -18,6 +19,11 @@
             true,
             "single"
         ],
+        "no-submodule-imports": [
+            true,
+            "rxjs",
+            "@angular"
+        ],
         "trailing-comma": [
             false
         ]
@@ -30,6 +36,8 @@
         "no-consecutive-blank-lines": [
             false
         ],
+        "object-literal-sort-keys": false,
+        "space-before-function-paren": false,
         "trailing-comma": [
             false
         ]
