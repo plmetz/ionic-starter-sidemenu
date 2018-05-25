@@ -60,6 +60,11 @@ jobs:
           name: Lint
           command: yarn run lint
 
+      # Ionic Doctor Check
+      - run:
+          name: Ionic Doctor
+          command: ionic doctor check
+
       # Run Unit Tests
       - run:
           name: Run Unit Tests
@@ -100,4 +105,49 @@ jobs:
       - store_artifacts:
           path: ./coverage/
           destination: test-coverage
-          
+
+  build-project:
+    docker:
+      - image: circleci/node:8.11-browsers
+
+    working_directory: ~/repo
+
+    steps:
+
+      #############
+      # BUILD APP #
+      #############
+
+      # Prepare App
+      - run:
+          name: Prepare
+          command: ionic cordova prepare
+
+      # Build Browser
+      - run:
+          name: Build Browser
+          command: ionic cordova build browser
+
+      # Store Browser Build Artifacts
+      - store_artifacts:
+          path: ./platforms/browser/www/
+          destination: build/browser
+
+      # Build Android
+      - run:
+          name: Build Android
+          command: ionic cordova build android
+
+      # Store Android Build Artifacts
+      - store_artifacts:
+          path: ./platforms/android/build/outputs/
+          destination: build/android
+
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - build
+      - build-project:
+          requires:
+            - build
