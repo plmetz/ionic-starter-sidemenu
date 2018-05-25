@@ -106,25 +106,9 @@ jobs:
           path: ./coverage/
           destination: test-coverage
 
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - ./
-
-  build-project:
-    docker:
-      - image: circleci/node:8.11-browsers
-
-    working_directory: ~/repo
-
-    steps:
-
       #############
       # BUILD APP #
       #############
-
-      - attach_workspace:
-          at: ~/repo
 
       # Prepare App
       - run:
@@ -140,22 +124,3 @@ jobs:
       - store_artifacts:
           path: ./platforms/browser/www/
           destination: build/browser
-
-      # Build Android
-      - run:
-          name: Build Android
-          command: ionic cordova build android
-
-      # Store Android Build Artifacts
-      - store_artifacts:
-          path: ./platforms/android/build/outputs/
-          destination: build/android
-
-workflows:
-  version: 2
-  test-and-build:
-    jobs:
-      - build
-      - build-project:
-          requires:
-            - build
